@@ -1,15 +1,17 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
+import space from "../../img/galaxy-background.png";
 import "../../styles/home.scss";
+import { Card } from "../component/card.js";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+export const Home = () => {
+	return (
+		<div className="space">
+			<div className="m-3">
+				<h2>Characters</h2>
+			</div>
+			<div className="text-center scroll d-flex flex-row m-3">
+				<Card />
+			</div>
+		</div>
+	);
+};
