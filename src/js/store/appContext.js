@@ -33,6 +33,8 @@ const injectContext = PassedComponent => {
 			 **/
 			// state.actions.loadCount();
 			state.actions.loadPeople();
+			state.actions.loadSingleChar();
+			state.store.loadedPeople === true ? console.log(state.store.singleChar) : "Loading";
 			//state.actions.loadPlanets();
 		}, []);
 

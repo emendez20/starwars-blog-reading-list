@@ -2,21 +2,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			people: [],
-			planets: [],
+			singleChar: {},
 			loadedPeople: false
 		},
 		actions: {
 			loadPeople: () => {
-				fetch("https://www.swapi.tech/api/people/")
+				// fetch("https://www.swapi.tech/api/people/")
+				// 	.then(res => res.json())
+				// 	.then(data => {
+				// 		setStore({ people: data.results });
+				// 		//setTodosFetch([...todosFetch, { label: input, done: false }]);
+				// 	})
+				// 	.catch(err => console.error("Error Ocurred During Fetch function" + err));
+				fetch("https://www.swapi.tech/api/people/1")
 					.then(res => res.json())
 					.then(data => {
-						console.log(data);
-						setStore({ people: data.results, loadedPeople: true });
-						console.log(data.results);
+						setStore({ singleChar: data, loadedPeople: true });
+
 						//setTodosFetch([...todosFetch, { label: input, done: false }]);
 					})
 					.catch(err => console.error("Error Ocurred During Fetch function" + err));
-			}
+			},
+			loadSingleChar: () => {}
 			// changeColor: (index, color) => {
 			// 	//get the store
 			// 	const store = getStore();
