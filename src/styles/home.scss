@@ -1,11 +1,17 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body{
+    font-family: 'Bebas Neue', cursive;
+}
 .space{
     background: url("../img/galaxy-background2.png");
-    height:1000px;
-    background-size: contain;
+    height:100%;
+    min-height: 1000px;
+    background-repeat: repeat;
 }
 h2{
-    color:#ffe81f;
+    color:#f9d71c;
+
 }
 .scroll{
 
@@ -35,4 +41,49 @@ h2{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #242526; 
+}
+.imgf{
+    width: 16px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.imgf:hover{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.4, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left:0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
 }

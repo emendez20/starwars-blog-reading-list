@@ -1,43 +1,110 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			favoritePeople: [],
+			favoritePlanets: [],
 			people: [],
+			planets: [],
 			singleChar: {},
-			loadedPeople: false
+			loadedPeople: false,
+			loadedPlanets: false
 		},
 		actions: {
-			loadPeople: () => {
-				// fetch("https://www.swapi.tech/api/people/")
-				// 	.then(res => res.json())
-				// 	.then(data => {
-				// 		setStore({ people: data.results });
-				// 		//setTodosFetch([...todosFetch, { label: input, done: false }]);
-				// 	})
-				// 	.catch(err => console.error("Error Ocurred During Fetch function" + err));
-				fetch("https://www.swapi.tech/api/people/1")
-					.then(res => res.json())
-					.then(data => {
-						setStore({ singleChar: data, loadedPeople: true });
+			//ASYNC AWAIT CONTROLS THE PROMISE. ASYNC TELLS THE FUNCTION THAT IT IS ASYNCHRONOUS, AND AWAIT MAKE IT WAIT FOR THE CALL TO BE RESOLVED. /// USING .THEN WILL PROVIDE THE SAME RESULT.
+			fetchPeople: async () => {
+				let newArray = [];
+				for (let i = 1; i <= 83; i++) {
+					if (i != 17) {
+						const url = `https://www.swapi.tech/api/people/${i}`;
+						const config = {
+							method: "GET",
+							headers: {
+								"Content-type": "application/json"
+							}
+						};
+						const response = await fetch(url, config);
+						const data = await response.json();
+						newArray.push(data);
+					}
+				}
 
-						//setTodosFetch([...todosFetch, { label: input, done: false }]);
-					})
-					.catch(err => console.error("Error Ocurred During Fetch function" + err));
+				setStore({ people: newArray, loadedPeople: true });
 			},
-			loadSingleChar: () => {}
-			// changeColor: (index, color) => {
-			// 	//get the store
-			// 	const store = getStore();
+			fetchPlanets: async () => {
+				let newArray = [];
+				for (let i = 1; i <= 60; i++) {
+					const url = `https://www.swapi.tech/api/planets/${i}`;
+					const config = {
+						method: "GET",
+						headers: {
+							"Content-type": "application/json"
+						}
+					};
+					const response = await fetch(url, config);
+					const data = await response.json();
+					newArray.push(data);
+				}
 
-			// 	//we have to loop the entire demo array to look for the respective index
-			// 	//and change its color
-			// 	const demo = store.demo.map((elm, i) => {
-			// 		if (i === index) elm.background = color;
-			// 		return elm;
-			// 	});
-
-			// 	//reset the global store
-			// 	setStore({ demo: demo });
-			// }
+				setStore({ planets: newArray, loadedPlanets: true });
+			},
+			setFavoritePeople: (id, index) => {
+				const store = getStore();
+				const actions = getActions();
+				//actions.deleteFavorite(store.favorite.indexOf("(Empty)"));
+				store.people.map(element => {
+					element.result.uid === id
+						? store.favoritePeople.includes(element.result.properties.name)
+							? ""
+							: setStore({
+									favoritePeople: [
+										...store.favoritePeople,
+										{
+											name: element.result.properties.name,
+											position: store.people.indexOf(element)
+										}
+									]
+							  })
+						: "";
+				});
+			},
+			setFavoritePlanet: id => {
+				const store = getStore();
+				const actions = getActions();
+				//actions.deleteFavorite(store.favorite.indexOf("(Empty)"));
+				store.planets.map(element => {
+					element.result.uid === id
+						? store.favoritePlanets.includes(element.result.properties.name)
+							? ""
+							: setStore({
+									favoritePlanets: [
+										...store.favoritePlanets,
+										{
+											name: element.result.properties.name,
+											position: store.planets.indexOf(element)
+										}
+									]
+							  })
+						: "";
+				});
+			},
+			deleteFavoritePeople: positionToDelete => {
+				const store = getStore();
+				let newArray = [];
+				store.favoritePeople.map((element, index) => {
+					index !== positionToDelete ? newArray.push(element) : "";
+				});
+				newArray === [] ? newArray.push("(Empty)") : "";
+				setStore({ favoritePeople: newArray });
+			},
+			deleteFavoritePlanet: positionToDelete => {
+				const store = getStore();
+				let newArray = [];
+				store.favoritePlanets.map((element, index) => {
+					index !== positionToDelete ? newArray.push(element) : "";
+				});
+				newArray === [] ? newArray.push("(Empty)") : "";
+				setStore({ favoritePlanets: newArray });
+			}
 		}
 	};
 };
