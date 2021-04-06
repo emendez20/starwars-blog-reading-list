@@ -45,8 +45,10 @@ export const NavbarMenu = () => {
 					{store.favoritePeople.length > 0
 						? store.favoritePeople.map((item, index) => {
 								return (
-									<Dropdown.Item key={index} href={"/singleCharacter/" + index}>
-										<Link to={"/singleCharacter/" + item.position}>{item.name + " "}</Link>
+									<Dropdown.Item key={index}>
+										<Link to={"/singleCharacter/" + item.position} className="text-decoration-none">
+											{item.name + " "}
+										</Link>
 										<i
 											onClick={() => {
 												actions.deleteFavoritePeople(index);
@@ -62,7 +64,7 @@ export const NavbarMenu = () => {
 					{store.favoritePlanets.length > 0
 						? store.favoritePlanets.map((item, index) => {
 								return (
-									<Dropdown.Item key={index} href="#/action-1">
+									<Dropdown.Item key={index}>
 										<Link to={"/singlePlanet/" + item.position} className="text-decoration-none">
 											{item.name + " "}
 										</Link>
@@ -81,16 +83,3 @@ export const NavbarMenu = () => {
 		</Navbar>
 	);
 };
-
-// <nav className="navbar navbar-dark" style={{ backgroundColor: "#040707" }}>
-// 	<Link to="/">
-// 		<span className="navbar-brand mb-0 h1">
-// 			<img src={swlogo} style={{ width: 100 }} />
-// 		</span>
-// 	</Link>
-// 	<div className="ml-auto">
-// 		<Link to="/home">
-// 			<button className="btn btn-secondary">Favorites</button>
-// 		</Link>
-// 	</div>
-// </nav>
