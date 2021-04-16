@@ -1,13 +1,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-body{
+html,body{
     font-family: 'Bebas Neue', cursive;
+    height: 100%;
+    background: url("../img/galaxy-background2.png");
 }
 .space{
     background: url("../img/galaxy-background2.png");
     height:100%;
-    min-height: 1000px;
+    // min-height: 1000px;
     background-repeat: repeat;
+    background-size: cover;
 }
 h2{
     color:#f9d71c;
@@ -86,4 +89,9 @@ h2{
     height: 72px;
     opacity: 0;
   }
+}
+.footer{
+    position:absolute;
+   bottom:0;
+   width: 100%;
 }

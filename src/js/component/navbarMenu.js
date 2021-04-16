@@ -79,6 +79,11 @@ export const NavbarMenu = () => {
 						  })
 						: "  (Empty)"}
 				</SplitButton>
+				<Nav.Item>
+					<Link className="nav-link" to="/login">
+						Login
+					</Link>
+				</Nav.Item>
 			</Nav>
 		</Navbar>
 	);
